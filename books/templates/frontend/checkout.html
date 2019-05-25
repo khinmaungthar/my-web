@@ -1,0 +1,63 @@
+
+{% extends 'frontend/master.html' %}
+{% block title %}Checkout List{% endblock title %}
+
+{% block content %}
+<hr>
+<div class="container-fluid">
+<br>
+        <table class="table table-striped table-bordered table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Book ID
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Author
+                    </th>
+                    <th>
+                        publisher
+                    </th>
+                    <th>
+                        Due Date
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in books %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.author }}</td>
+                    <td>{{ item.publisher }}</td>
+                    <td>{% now "jS F Y" %}</td>
+                    <td>
+                        <a href="../../frontend/remove/{{ item.id }}" class="btn btn-outline-danger btn-sm"><span class="glyphicon glyphicon-trash"></span>
+                        </a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            <tr>
+                <td colspan="5"></td>
+                <td>
+                    {% if 'books' in request.session.keys %}
+                        <a href="../../frontend/borrow" class="btn btn-outline-success">Borrow All</a>
+                    <a href="../../frontend/removeall" class="btn btn-outline-warning"  onclick='return confirm("Do you want to remove all items?")'>Remove All</a>
+                    {% endif  %}
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <hr>
+
+ </div>
+
+{% endblock content %}

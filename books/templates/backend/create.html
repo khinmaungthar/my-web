@@ -1,0 +1,46 @@
+{% extends 'backend/master.html' %}
+{% block title %}Book Information{% endblock title %}
+
+{% block content %}
+         <form method="POST" class="post-form" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+             <div class="container table-responsive-md">
+            <table class="table table-striped">
+                <tr>
+                    <td style="width: 10%;"><b>Enter Book Title :</b></td>
+                    <td style="width: 50%;"><input type="text" name="title" required="true"></td>
+                </tr>
+                <tr>
+                    <td><b>Enter Author :</b></td>
+                    <td><input type="text" name="author" required="true"></td>
+                </tr>
+                <tr>
+                    <td><b>Enter Publisher :</b></td>
+                    <td><input type="text" name="publisher" required="true"></td>
+                </tr>
+                <tr>
+                    <td><b>Enter Summary :</b></td>
+                    <td><input type="text" name="summary" required="true"></td>
+                </tr>
+                <tr>
+                    <td><b>Enter Borrow Status :</b></td>
+                    <td><input type="checkbox" name="borrowStatus" checked="True" value = "on"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Enter Release Date :</b></td>
+                    <td><input class="form-control" type="date" style="width: 20%;" data-date-inline-picker="true" data-date-format="DD/MMMM/YYYY"  name="releaseDate"/><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Enter Photo :</b></td>
+                    <td><input type="file" name="photo" required="true"></td>
+                </tr>
+                 <tr>
+                     <td></td>
+                    <td><input type="submit" class="btn btn-success" value="Submit"></td>
+                </tr>
+            </table>
+                 </div>
+        </form>
+{% endblock content %}

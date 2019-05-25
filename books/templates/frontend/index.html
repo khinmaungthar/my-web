@@ -1,0 +1,52 @@
+
+{% extends 'frontend/master.html' %}
+{% block title %}Book List{% endblock title %}
+
+{% block content %}
+<hr>
+<div class="container-fluid">
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li>{% if messages.tags %} class="{{ messages.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+ <div class="row col-sm-12">
+  {% for p in books %}
+  <div class="col-sm-3 pr-5" style="text-align:center;border-radius:10px;display:block;clear:both;">
+   <div class="card" style="padding:20px;margin-bottom:20px;">
+    <div class="card-block">
+     <div class="card-title">
+      <img src="../../static/images/{{p.photo}}" class = "img-fluid" width="100" height="80" style="border-radius:10px;">
+     </div>
+     <p class="card-text">
+      <b>Title:  </b><i class="fa fa-box">{{p.title}}</i>
+     </p>
+     <p class="card-text">
+      <b>Author: </b><i>{{p.author}}</i>
+     </p>
+        {% if p.borrowStatus == True %}
+        <p class="card-text">
+        <b>Status: </b><i>Already Borrowed</i>
+
+        </p>
+         <br>
+
+         {% else %}
+        <p class="card-text">
+         <b>Status: </b><i>Available</i>
+        </p>
+        <a href="../../frontend/add-to-cart/{{p.id}}" class="btn btn-outline-info">
+        <i class="fa fa-shopping-cart"></i>Add to Cart
+        </a>
+        {% endif  %}
+
+    </div>
+   </div>
+  </div>
+  {% endfor %}
+ </div>
+</div>
+
+{% endblock content %}

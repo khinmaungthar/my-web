@@ -1,0 +1,96 @@
+
+{% extends 'backend/master.html' %}
+{% block title %}Book List{% endblock title %}
+
+{% block content %}
+<div class="container">
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{% if messages.tags %} class="{{ messages.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+<br>
+        <table id="myTable" class="table table-striped display compact">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Book ID
+                    </th>
+                    <th>
+                        Photo
+                    </th>
+                    <th>
+                       Title
+                    </th>
+                    <th>
+                        Author
+                    </th>
+                    <th>
+                        Publisher
+                    </th>
+                    <th>
+                        Release Date
+                    </th>
+                    <th>
+                        Borrow Status
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.photo }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.publisher }}</td>
+                    <td>{{ book.releaseDate }}</td>
+                     {% if book.borrowStatus == True %}
+                        <td> Yes </td>
+                    {% else %}
+                        <td>No</td>
+                    {% endif  %}
+                    <td ><a href="/backend/edit/{{ book.id }}" class="btn btn-outline-info btn-sm" >
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                     <a href="/backend/delete/{{ book.id }}" class="btn btn-outline-danger btn-sm" onclick='return confirm("Do you want to delete book name : {{ book.title }} ?")'>
+                             <span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <!-- tablesorter widgets (optional) -->
+  <script>
+  $(document).ready( function() {
+  $('#myTable').DataTable({
+    responsive: true,
+     "info":     false,
+
+     "columnDefs": [
+        { "orderable": false, "targets": 7}
+    ]
+    });
+});
+</script>
+
+</script>
+{% endblock %}

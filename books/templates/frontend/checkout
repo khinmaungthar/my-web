@@ -1,0 +1,58 @@
+
+{% extends 'master.html' %}
+{% block title %}Shopping Cart Sample List{% endblock title %}
+
+{% block content %}
+<hr>
+<div class="container-fluid">
+<br>
+        <table class="table table-striped table-bordered table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Product ID
+                    </th>
+                    <th>
+                        Product Name
+                    </th>
+                    <th>
+                        Product Price
+                    </th>
+                    <th>
+                        Qty
+                    </th>
+                    <th>
+                        Subtotal
+                    </th>
+                    <th>
+                        Remove
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id,product in products %}
+                <tr>
+                    <td>{{ id }}</td>
+                    <td>{{ product.0.name }}</td>
+                    <td>{{ product.0.price }}</td>
+                    <td>{{ product.0.qty }}</td>
+                    <td>{% widthratio product.0.price 1 product.0.qty %}</td>
+                    <td>
+                        <a href="../../remove/{{ product.0.id }}" class="btn btn-danger">Remove
+                        </a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            <tr>
+                <td colspan="4">Total Payment</td>
+                <td><a href="../../borrow" class="btn btn-primary">Borrow</a> </td>
+                <td><a href="../../removeall" class="btn btn-primary">Remove All</a> </td>
+            </tr>
+            </tbody>
+        </table>
+        <hr>
+
+ </div>
+
+{% endblock content %}

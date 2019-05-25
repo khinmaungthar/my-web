@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-compatible" content="ie=edge">
+	{% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/my.css' %}">
+	<title>{% block title %}{% endblock title %}</title>
+	 
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg  navbar-light " style="background-color: #e3f2fd;">
+  <a class="navbar-brand mb-0 h1" href="../frontend/">ABC Library System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="../../backend/">Books <span class="sr-only">(current)</span></a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="../../backend/create">Add New Books <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About Us</a>
+      </li>
+        <form class="form-inline my-2 my-lg-0" action="../../backend/" method="GET">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search" aria-label="Search" value="{{ search }}">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</button>
+    </form>
+        </ul>
+      <ul class="nav navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+          <li class="nav-item active"> <a class="nav-link"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span>::{{ user.get_username }}</a></li>
+     <li><a class="btn btn-info ml-auto mr-1" href="{% url 'logout'%}?next={{request.path}}" onclick='return confirm("Do you want to logout ?")'><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
+      {% else %}
+      <li><a class="btn btn-info ml-auto mr-1" href="{% url 'login'%}?next={{request.path}}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</a></li>
+      {% endif %}
+
+			</ul>
+
+
+  </div>
+   
+
+</nav>
+<div id = "content">
+    {% block content %}
+	{% endblock content %}
+</div>
+ <div id="footer">
+      <div class="container">
+          <div class="row" style="border-top-color : darkorange; border-top-style: solid; width: 100%;">
+            <div class="col-sm-5">
+                <h6> Contact Us</h6>
+                <p class="head">
+                    <span class="glyphicon glyphicon-phone-alt aria-hidden="></span> Phone:
+                    <span class="helper-d phone">(95-1) 372 666, 372 655</span>
+                </p>
+                <p class="head">
+                    <span class="glyphicon glyphicon-envelope aria-hidden="></span> Email:
+                    <a class="email link-g" href="mailto:cbbank@mptmail.net.mm">
+                        <span> contact@abc.mm </span>
+                    </a>
+                </p>
+            </div>
+            <div class="col-sm-3">
+                <br>
+                <a class="HomeFooter_Links_None" href="http://www.facebook.com/" target="_black" style="margin-left:5px;">
+                    <img src="{% static 'images/fb_icon.jpg' %}" alt="Facebook">
+                </a>
+                <a class="HomeFooter_Links_None" href="https://twitter.com/" target="_black">
+                    <img src="{% static 'images/twitter_icon.png' %}" alt="Twitter">
+                </a>
+                <a class="HomeFooter_Links_None" href="https://www.linkedin.com/company/" target="_black">
+                    <img src="{% static 'images/LinkIn_icon.png' %}" alt="LinkedIn">
+                </a>
+                <a class="HomeFooter_Links_None" href="https://www.instagram.com/" target="_black">
+                    <img src="{% static 'images/Instagram_icon.png' %}" alt="Instagram">
+                </a>
+            </div>
+
+            <div class="col-sm-4">
+                <br>
+                ©{% now "Y" %} ABC LIBRARY All RIGHTS RESERVED.
+
+            </div>
+          </div>
+           </div>
+</div>
+{% block js %}
+
+{% endblock js %}
+
+</body>
+</html>

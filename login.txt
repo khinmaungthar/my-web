@@ -1,0 +1,35 @@
+https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication
+
+
+
+path('accounts/login/ [name='login']', include('django.contrib.auth.urls')),
+	path('accounts/logout/ [name='logout']',include('django.contrib.auth.urls')),
+	path('accounts/password_change/ [name='password_change']',include('django.contrib.auth.urls')),
+	path('accounts/password_change/done/ [name='password_change_done']',include('django.contrib.auth.urls')),
+	path('accounts/password_reset/ [name='password_reset']',include('django.contrib.auth.urls')),
+	path('accounts/password_reset/done/ [name='password_reset_done']',include('django.contrib.auth.urls')),
+	path('accounts/reset/<uidb64>/<token>/ [name='password_reset_confirm']',include('django.contrib.auth.urls')),
+	path('accounts/reset/done/ [name='password_reset_complete']',include('django.contrib.auth.urls')),
+]
+
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+bottom: .5em;
+
+
+ {% if user.is_authenticated %}
+     <li>User: {{ user.get_username }}</li>
+     <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
+      {% else %}
+      <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
+      {% endif %} 
+

@@ -1,0 +1,75 @@
+{% extends 'backend/master.html' %}
+{% block title %}Book Update{% endblock title %}
+
+{% block content %}
+        <form method="POST" class="post-form" action="/backend/update/{{book.id}}" enctype="multipart/form-data">
+            {% csrf_token %}
+             <div class="container">
+                    <div class="form-group row">
+                        <label class="col-sm-1 col-form-label"></label>
+                        <div class="col-sm-4">
+                            {# <h5>Update Book Details</h5>#}
+                            
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Title:</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="title" id="title" required maxlength="100" value="{{ book.title }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Author:</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="author" id="author" required maxlength="200" value="{{ book.author }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Publisher:</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="publisher" id="publisher" required maxlength="200" value="{{ book.publisher }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Summary:</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="summary" id="summary" required maxlength="200" value="{{ book.summary }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Borrow Status:</label>
+                        <div class="col-sm-4">
+                            {% if book.borrowStatus == True %}
+                                <input type="checkbox" name="borrowStatus" checked  value="on"/>
+                            {% else %}
+                                <input type="checkbox" name="borrowStatus"  value="on"/>
+                            {% endif  %}
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Release Date:</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="date" name="releaseDate" data-date-inline-picker="true" data-date-format="DD/MMMM/YYYY"  value="{{ book.releaseDate|date:'Y-m-d' }}" placeholder="{{ books.releaseDate }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Product Photo:</label>
+                        <div class="col-sm-4">
+                            <input type="file" name="photo" id="photo" required maxlength="200" value="{{ book.photo }}">
+                             <br>
+                            <br>
+                            <button type="submit" class="btn btn-success">Update</button>
+                            <img src="../../static/images/{{book.photo}}" width="100" height="80" style="border-radius:10px;">
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-1 col-form-label"></label>
+                        <div class="col-sm-4">
+                            <button type="submit" class="btn btn-success">Update</button>
+                        </div>
+                    </div>
+                </div>
+        </form>
+{% endblock content %}

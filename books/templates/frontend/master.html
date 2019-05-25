@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-compatible" content="ie=edge">
+	{% load static %}
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+	
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+	<title>{% block title %}{% endblock title %}</title>
+	 
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+  <a class="navbar-brand mb-0 h1" href="../../frontend/">ABC Library System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="../../frontend/">Books <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About Us</a>
+      </li>
+      <form class="form-inline my-2 my-lg-0" action="../../frontend/" method="GET">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search" aria-label="Search" value="{{ search }}">>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</button>
+    </form>
+    </ul>
+    
+
+        <ul class="nav navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+          <li class="nav-item active"> 
+          {% if user.is_superuser %}
+          <a class="nav-link" href="../backend/"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span>::{{ user.get_username }}</a>
+          {% else %}
+          <a class="nav-link"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span>::{{ user.get_username }}</a>
+          {% endif %}
+          <li><a href="../../frontend/checkout/" class="btn btn-danger ml-auto mr-1">
+        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+        <i class="fa fa-shooping-cart"></i>
+        Books Cart
+        <span class="badge badge-dark">{{counts}}</span> </a></li>
+        </li>
+     <li><a class="btn btn-info ml-auto mr-1" href="{% url 'logout'%}?next={{request.path}}"  onclick='return confirm("Do you want to logout ?")'><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
+      {% else %}
+      <li><a class="btn btn-info ml-auto mr-1" href="{% url 'login'%}?next={{request.path}}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</a></li>
+      {% endif %}
+
+      </ul>
+   
+
+      
+  </div>
+
+
+</nav>
+<div id = "content">
+    {% block content %}
+	{% endblock content %}
+</div>
+<!-- Footer -->
+<footer class="page-footer font-small bg-light text-dark lighten-3 pt-4">
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left ">
+
+    <!-- Grid row -->
+    <div class="row ">
+
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
+
+        <!-- Content -->
+        <h5 class="font-weight-bold text-uppercase mb-4">Footer Content</h5>
+        <p>Here you can use rows and columns to organize your footer content.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit amet numquam iure provident voluptate
+          esse
+          quasi, veritatis totam voluptas nostrum.</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1">
+
+        <!-- Links -->
+        <h5 class="font-weight-bold text-uppercase mb-4">About</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <p>
+              <a href="../../frontend/">BOOKS</a>
+            </p>
+          </li>
+          <li>
+            <p>
+              <a href="#!">FAQ</a>
+            </p>
+          </li>
+          <li>
+            <p>
+              <a href="#!">BLOG</a>
+            </p>
+          </li>
+          <li>
+            <p>
+              <a href="#!">AWARDS</a>
+            </p>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1">
+
+        <!-- Contact details -->
+        <h5 class="font-weight-bold text-uppercase mb-4">Address</h5>
+
+        <ul class="list-unstyled">
+          <li>
+           <p>
+               <span class="glyphicon glyphicon-home aria-hidden="></span> :
+                        <span> New York, NY 10012, US </span>
+                    </a></p>
+          </li>
+          <li>
+            <p>
+               <span class="glyphicon glyphicon-envelope aria-hidden="></span> :
+                    <a class="email link-g" href="mailto:cbbank@mptmail.net.mm">
+                        <span> contact@abc.mm </span>
+                    </a></p>
+          </li>
+          <li>
+            <p>
+              <span class="glyphicon glyphicon-phone-alt aria-hidden="></span> :
+                    <span class="helper-d phone">(95-1) 372 666, 372 655</span>
+              </p>
+          </li>
+
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-2 col-lg-2 text-center mx-auto my-4">
+
+        <!-- Social buttons -->
+        <h5 class="font-weight-bold text-uppercase mb-4">Follow Us</h5>
+
+        <!-- Facebook -->
+        <a class="HomeFooter_Links_None" href="http://www.facebook.com/" target="_black" style="margin-left:5px;">
+            <img src="{% static 'images/fb_icon.jpg' %}" alt="Facebook">
+         </a>
+        <!-- Twitter -->
+        <a class="HomeFooter_Links_None" href="https://twitter.com/" target="_black">
+                    <img src="{% static 'images/twitter_icon.png' %}" alt="Twitter">
+                </a>
+        <!-- Linkedin +-->
+        <a class="HomeFooter_Links_None" href="https://www.linkedin.com/company/" target="_black">
+                    <img src="{% static 'images/LinkIn_icon.png' %}" alt="LinkedIn">
+                </a>
+        <!-- Dribbble -->
+         <a class="HomeFooter_Links_None" href="https://www.instagram.com/" target="_black">
+                    <img src="{% static 'images/Instagram_icon.png' %}" alt="Instagram">
+                </a>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3 bg-dark text-white">©{% now "Y" %} Copyright:
+    <a href="../../frontend/"> ABCLibrary.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+</body>
+</html>
